@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        #app {
+            border: dashed black 1px;
+            display: inline-block;
+            padding: 0 20px;
+        }
+        #app label {
+            padding: 5px;
+        }
+        #app label:hover {
+            cursor: pointer;
+            background-color: lightgray;
+            border-radius: 5px;
+        }
+        ul {
+            list-style-type: none;
+        }
+        li {
+            border-radius: 5px;
+            padding: 5px;
+            margin: 2px;
+            background-color: rgb(211, 254, 211);
+        }
+        .impClass {
+            background-color: rgb(255, 202, 202);
+            font-weight: bold;
+        }
+    </style>
+</head>
+<body>
+
+<h1>Shopping List with Important Items</h1>
+
+    <div id="app">
+        <form @:submit.prevent="addItem">
+            <p>
+                What do you need ?
+                <input type="text" required placeholder="item name.." v-model="itemName">
+            </p>
+            <p>
+                How many ?
+                <input type="number" placeholder="number of Items" v-model="itemNumber">
+            </p>
+            <p>
+                Important ?
+                <label>
+                    <input type="checkbox" v-model="itemImportant">
+                    {{ itemImportant }}
+                </label>
+            </p>
+            <button type="submit">Add Item</button>
+        </form>
+        <br>
+        <hr>
+
+        <div>
+            <p><strong>Shopping List:</strong></p>
+            <ul>
+                <li v-for="item in shoppingList" :class="{ impClass: item.important }">{{ item.name }}, {{ item.number }}</li>
+            </ul>
+        </div>
+
+    </div>
+    
+</body>
+<script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
+<script>
+    const app = Vue.createApp({
+        data(){
+            return {
+                itemName: null,
+                itemNumber: null,
+                itemImportant: false,
+                shoppingList: [
+                { name: 'Tomatoes', number: 5, important: false }
+                ]
+            }
+        },
+        methods: {
+        addItem(){
+            let item = {
+                name: this.itemName,
+                number: this.itemNumber,
+                important: this.itemImportant
+            }
+            this.shoppingList.push(item)
+            this.itemName = null
+            this.itemNumber = null  
+            this.itemImportant = false
+        }
+        }
+    })
+    app.mount('#app')
+</script>
+</html>
