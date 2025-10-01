@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Passing both an Argument and The Event Object</title>
+    <!-- If we want to pass both the event object and another argument, there is a reserved name '$event' we can use where the method is called, like this: -->
+      <style>
+        #app {
+            border: dashed black 1px;
+            width: 180px;
+            padding: 10px;
+        }
+        #app img {
+            width: 100%;
+            height: 200px;
+        }
+        #green {
+            background-color: lightgreen;
+            display: inline-block;
+        }
+     </style>
+</head>
+<body>
+
+    <h1>Example: Passing an Argument and the Event Object with a Method</h1>
+    <p>In this example we see that it is possible to send both the event object and a text as an argument with a method. To do this we must use the reserved name for event methods: '$event'.</p>
+    <p>Click on the tiger image:</p>
+
+    <div id="app">
+        <img src="https://www.w3schools.com/vue/img_tiger_square.jpeg" id="tiger" alt="tiger.jpg" @:click="myMethod($event, 'Hello')" width="733" height="733">
+        <p>Here is the meesage sent with the method, and the id of the image tag: </p>
+        <span id="green">"{{ msgAndId }}"</span>
+    </div>
+
+    
+</body>
+<script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
+<script>
+    const app = Vue.createApp({
+        data(){
+            return {
+                msgAndId: ''
+            }
+        },
+        methods: {
+            myMethod(e, msg){
+                this.msgAndId = msg + ", "
+                this.msgAndId += e.target.id
+            }
+        }
+    })
+    app.mount("#app");
+</script>
+</html>

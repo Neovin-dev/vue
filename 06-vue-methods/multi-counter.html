@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title></title>
+    <style>
+        #app {
+            border: dashed black 1px;
+            box-sizing: border-box;
+            padding: 10px;
+            display: flex;
+            flex-wrap: wrap;
+        }
+        #app > div {
+            flex-basis: 200px;
+            margin: 5px;
+        }
+        img {
+            width: 100%;
+            height: 200px;
+        }
+        button {
+            margin: 5px;
+            padding: 3px 6px;
+        }
+    </style>
+</head>
+<body>
+    <h1>Passing Arguments and Event Object with Methods</h1>
+    <p>In this example we are able to count tigers, moose and kangaroos, with different increments, all buttons refering to the same method. This is possible by passing the numbers counted as an argument, and by passing the event.</p>
+    <div id="app">
+        <div id="tigers">
+            <img src="https://www.w3schools.com/vue/img_tiger_square.jpeg" id="tiger" alt="tiger.jpg" width="733" height="733">
+            <button @:click="addAnimal($event,5)">+5</button>
+            <button @:click="addAnimal($event,1)">+1</button>
+            
+            <button @:click="addAnimal($event,-1)">-1</button>
+            <button @:click="addAnimal($event,-5)">-5</button>
+        </div>
+        <div id="moose">
+            <img src="https://www.w3schools.com/vue/img_moose.jpg" alt="moose image"  width="770" height="549" >
+            <button @:click="addAnimal($event,5)">+5</button>
+            <button @:click="addAnimal($event,1)">+1</button>
+
+            <button @:click="addAnimal($event,-1)">-1</button>
+            <button @:click="addAnimal($event,-5)">-5</button>
+        </div>
+        <div id="kangaroos">
+            <img src="https://www.w3schools.com/vue/img_kangaroo_square.jpeg" alt="kangaroo image" width="582" height="582"> 
+            <button @:click="addAnimal($event,5)">+5</button>
+            <button @:click="addAnimal($event,1)">+1</button>
+
+            <button @:click="addAnimal($event,-1)">-1</button>
+            <button @:click="addAnimal($event,-5)">-5</button>
+        </div>
+
+        <ul>
+            <li>Tigers: {{ tigers }}</li>
+            <li>Moose: {{ moose }}</li>
+            <li>Kangaroos: {{ kangaroos }}</li>
+        </ul>
+    </div>
+
+
+
+    
+</body>
+<script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
+<script>
+    const app = Vue.createApp({
+        data(){
+            return {
+                tigers: 0,
+                moose: 0,
+                kangaroos: 0
+            }
+        },
+        methods: {
+            addAnimal(e, number){
+                if(e.target.parentElement.id==="tigers"){
+                    this.tigers+=number;
+                }
+                else if(e.target.parentElement.id==="moose"){
+                    this.moose+=number;
+                }else{
+                    this.kangaroos+=number;
+                }
+            }
+        }
+    })
+    app.mount("#app");
+</script>
+</html>
