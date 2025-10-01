@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title></title>
+    <style>
+        form {
+            border: dashed black 1px;
+            width: 200px;
+            padding: 20px;
+        }
+    </style>
+</head>
+<body>
+    <h1>Shopping List</h1>
+    <div id="app">
+        <form @:submit.prevent="addItem">
+            <p>
+                What do you need ?
+                <input type="text" required placeholder="item name.." v-model="itemName">
+            </p>
+            <p>
+                How many ?
+                <input type="number" placeholder="number of Items" v-model="itemNumber">
+            </p>
+            <button type="submit">Add Item</button>
+        </form>
+
+        <div>
+            <p>Shopping List:</p>
+            <ul>
+                <li v-for="item in shoppingList">{{ item.name }}, {{ item.number }}</li>
+            </ul>
+        </div>
+
+    </div>
+
+    
+</body>
+<script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
+<script>
+    const app = Vue.createApp({
+        data(){
+            return {
+                itemName: null,
+                itemNumber: null,
+                shoppingList: [
+                    {name: 'Tomatoes', number: 5}
+                ]
+            }
+        },
+        methods: {
+            addItem(){
+                let item = {
+                    name: this.itemName,
+                    number: this.itemNumber
+                }
+                this.shoppingList.push(item)
+                this.itemName = null,
+                this.itemNumber = null
+                
+            }
+        }
+    })
+    app.mount("#app");
+</script>
+</html>
