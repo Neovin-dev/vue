@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Click to run method</title>
+    <style>
+        #app {
+        border: black dashed 1px;
+        width: 200px;
+        padding: 0 20px 20px 20px;
+        }
+        #app > div {
+        width: 140px;
+        height: 60px;
+        background-color: lightgreen;
+        padding: 20px;
+        font-weight: bold;
+        font-family: 'Courier New', Courier, monospace;
+        }
+    </style>
+    </head>
+<body>
+    <!-- Vue methods are functions that belong to the Vue instance under the 'methods' property.
+    Vue methods are great to use with event handling (v-on) to do more complex things.
+    Vue methods can also be used to do other things than event handling. -->
+
+    <div id="app">
+        <div @:click="writeText">{{ text }}</div>
+    </div>
+
+</body>
+<script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
+<script>
+    // We have already used one Vue property in this tutorial, the 'data' property, where we can store values.
+    // There is another Vue property called 'methods' where we can store functions that belong to the Vue instance. A method can be stored in the Vue instance like
+    const app = Vue.createApp({
+        data(){
+            return {
+               text: ''
+            }
+        },
+        methods: {
+            // We need to write this. as prefix to refer to a data property from inside a method.
+            writeText(){
+                this.text = "Hello World"
+            }
+        }
+    })
+    app.mount("#app");
+</script>
+</html>

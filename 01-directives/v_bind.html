@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Directives</title>
+    <!-- --------------------------------------- style ---------------------------------------------------- -->
+    <style>
+        .pinkBG {
+            background-color: lightpink;
+            height: 20px;
+            width: 20px;
+        }
+    </style>
+    <!-- --------------------------------------- style ---------------------------------------------------- -->
+</head>
+<body>
+    <!-- --------------------------------------- div-section ---------------------------------------------------- -->
+    <div id="app">
+        <div v-bind:class="vueClass">
+
+        </div>
+        <!-- <div class="stylingClass" v-bind:style="{fontSize: size}">
+            HEADING 1 {{ fontSize: size }} will give an error as js is expecting a js expression but we are giving it an object.
+            You can use any valid JS expression inside {{ }}, like: 
+        </div> -->
+        <div class="stylingClass" v-bind:style="{fontSize: size}">
+            HEADING 1 {{ size }} {{fontSize + " : " + size}} 
+            <!-- this is valid of the above issue -->
+        </div>
+        <div class="stylingClass2" v-bind:style="{fontSize: size2 + 'px' }">
+            HEADING 2
+        </div>
+        <div v-bind:style="{ backgroundColor: 'hsl('+bgVal+',80%,80%)' }">
+            Notice the background color on this div tag.
+        </div>
+        <div v-bind:style="{ backgroundColor: isImportant ? 'red' : 'lightgray' }">
+            Conditional background color
+        </div>
+
+        <div v-bind:class="className">
+            The class is set with Vue
+            <!-- The value of v-bind:class can also be an object, where the class name will only take effect if it is set to 'true': -->
+        </div>
+        <!-- The class attribute is assigned or not depending on if the class 'myClass' is set to 'true' or 'false': -->
+        <div v-bind:class="{ myClass: true }">
+            The class is set conditionally to change the background color
+        </div>
+        <!-- shorthand for v-bind: is : -->
+         <!-- This binds a static property impClass, not the value "backgroundColor". You need to use bracket notation to make the key dynamic: -->
+         <div :style="{ [impClass] : isImportant2 ? 'red' : 'lightgray' }">
+            The class is set conditionally to change the background color
+         </div>
+    </div>
+    <!-- --------------------------------------- div-section ---------------------------------------------------- -->
+
+
+    <!-- ----------------------------------------script --------------------------------------------------------- -->
+    <script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
+    <script>
+        const app = Vue.createApp({
+            data(){
+                return {
+                    vueClass: "pinkBG",
+                    bgVal: '80%',
+                    fontSize: "font-size",
+                    size: '24px',
+                    size2: "44",
+                    className: 'VueClass2',
+                    isImportant: true,
+                    isImportant2: true,
+                    impClass: "backgroundColor"
+                }
+            }
+        })
+        app.mount('#app')
+    </script>
+    <!-- ----------------------------------------script --------------------------------------------------------- -->
+
+</body>
+</html>

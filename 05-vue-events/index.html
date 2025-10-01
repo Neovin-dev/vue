@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Vue Events</title>
+    <style>
+        button {
+            width: 100px;
+            height: 40px;
+        }
+    </style>
+</head>
+<body>
+    <!-- Event handling in Vue is done with the v-on directive, so that we can make something happen when for example a button is clicked.
+    Event handling is when HTML elements are set up to run a certain code when a certain event happens.
+    Events in Vue are easy to use and will make our page truly responsive.
+    Vue methods are code that can be set up to run when an event happens.
+    With v-on modifiers you can describe in more detail how to react to an event. -->
+
+    <div id="app">
+        <p>{{"Moose Count: " + count}}</p>
+        <button v-on:click="count++">Click me</button>
+        <button v-on:click="count--">Click me</button>
+        <!-- In addition to v-on and Vue methods we can use something called event modifiers to modify an event so that it for example only happens once after a page is loaded, or modify an event like 'submit' to prevent a form from being submitted. -->
+
+        <div id="lightId">
+            <div v-show="lightOn"><img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRk56N_UCLJmQwuDtz6kWhPuonQB6FJhuP_IQ&s" alt="bulb"></div>
+            
+        </div>
+        <button v-on:click="lightOn = !lightOn">Switch Light</button>
+
+
+        <input type="text" v-on:input="inpCount++" placeholder="Start writing..">
+        <p>{{ 'Input event Occured: ' + inpCount }}</p>
+    </div>
+</body>
+<script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
+<script>
+    const app = Vue.createApp({
+        data() {
+            return {
+                count: 0,
+                lightOn: false,
+                inpCount: 0
+            }
+        }
+    })
+    app.mount("#app")
+</script>
+</html>

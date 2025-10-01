@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <div id="app">
+        <!-- We use comparison operators like <, >= or !== to do such checks. Comparison checks can also be combined with logical operators such as && or ||. -->
+        <p v-if="typeWritersInStock >= 100">
+            In Stock
+        </p>
+        <p v-else-if="typeWritersInStock <= 10">
+            Stock is running out 
+        </p>
+        <p v-else>
+            Not In Stock.
+        </p>
+
+        <!-- dynamic condtion which are return of a value from a function -->
+        <p v-if="text.includes('pizza')">
+            The text includes the word 'Pizza'
+            <!-- we have searched for pizza with capital P and in text it is smaller so made it small -->
+        </p>
+        <p v-else-if="text.includes('Thai beef salad')">
+            The text includes the word 'Thai beef salad'
+        </p>
+        <p v-else>
+            The text doesnt includes Both
+        </p>
+
+    </div>
+    
+</body>
+    <script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
+    <script>
+        const app = Vue.createApp({
+            data(){
+                return {
+                    text: 'I like taco, pizza, Thai beef salad, pho soup and tangine'
+                }
+            }
+        })
+        app.mount("#app");
+    </script>
+</html>

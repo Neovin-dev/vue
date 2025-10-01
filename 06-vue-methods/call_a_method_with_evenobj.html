@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Call a Method with the Event Object</title>
+    <style>
+        #app {
+            border: black dashed 1px;
+            width: 200px;
+            padding: 0 20px 20px 20px;
+        }
+        #app > div {
+            width: 160px;
+            height: 80px;
+            background-color: lightcoral;
+            padding: 20px;
+        }
+        #app span {
+            font-weight: bold;
+            font-family: 'Courier New', Courier, monospace;
+        }
+    </style>
+</head>
+<body>
+    <h1>Mouse Pointer Position</h1>
+    <!-- When an event occurs so that a method is called, the event object is passed with the method by default. This is very convenient because the event object contains a lot of useful data, like for example the target object, the event type, or the mouse position when the 'click' or 'mousemove' event occurred. -->
+     <div id="app">
+        <p>Move the mouse pointer over the box</p>
+        <!-- we have listner on the div  -->
+         <div @:mousemove="mousePosition" v-bind:style="{backgroundColor:'hsl('+xPosition+',80%,80%)'}"></div>
+         <span>xPosition: {{ xPosition }}</span><br>
+         <span>yPosition: {{ yPosition }}</span>
+        </div>
+     </div>
+    
+</body>
+<script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
+<script>
+    const app = Vue.createApp({
+        data(){
+            return {
+                xPosition: 0,
+                yPosition: 0
+            }
+        },
+        methods: {
+            mousePosition(event){
+                this.xPosition = event.offsetX
+                this.yPosition = event.offsetY
+            }
+        }
+    })
+    app.mount('#app')
+</script>
+</html>

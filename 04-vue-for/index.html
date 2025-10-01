@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        #app > div {
+            border: solid black 1px;
+            width: 80%;
+            padding: 10px;
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: space-around;
+        }
+        img {
+            width: 70px;
+            margin: 10px;
+        }
+    </style>
+</head>
+<body>
+    <!-- With normal JavaScript you might want to create HTML elements based on an array. You use a for-loop, and inside you need to create the elements, adjust them, and then add each element to your page. And these elements will not react to a change in the array.
+
+    With Vue you start with the HTML element you want to create into a list, with v-for as an attribute, refer to the array inside the Vue instance, and let Vue take care of the rest. And the elements created with v-for will automatically update when the array changes. -->
+
+    <!-- "List rendering" in Vue is done by using the v-for directive, so that several HTML elements are created with a for-loop. -->
+    <div id="app">
+        <ol>
+            <li v-for="x in manyFoods"> {{ x }} </li>
+            <!-- manyFoods is an array that will be iterated usinf v-for as in x in manyFoods -->
+        </ol>
+
+        <div><img v-for="x in manyFoodsImages" :src="x">
+
+        </div>
+
+        <div>
+            <figure v-for="x in manyFoods">
+                <img v-bind:src="x.url">
+                <figcaption>{{ x.name }}</figcaption>
+            </figure>
+        </div>
+
+        <!-- The index number of an array element can be really useful in JavaScript for-loops. Luckily we can get the index number when using v-for in Vue as well.
+
+        To get the index number with v-for we need to give two comma separated words in parentheses: the first word will be the array element, and the second word will be the index of that array element. -->
+
+        <p v-for="(x, index) in manyFoods">
+            {{ index }}: "{{ x }}"
+        </p>
+
+    </div>
+    
+</body>
+<script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
+<script>
+    const app = Vue.createApp({
+        data(){
+            return {
+                manyFoods: [
+                    'Burrito',
+                    'Salad',
+                    'Cake',
+                    'Soup',
+                    'Fish',
+                    'Pizza',
+                    'Rice'
+                ],
+                manyFoodsImages: [
+                    'img_burrito.svg',
+                    'img_salad.svg',
+                    'img_cake.svg',
+                    'img_soup.svg',
+                    'img_fish.svg',
+                    'img_pizza.svg',
+                    'img_rice.svg'
+                ]
+            }
+        }
+    })
+    app.mount('#app')
+
+</script>
+</html>
